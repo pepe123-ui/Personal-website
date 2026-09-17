@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinho</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Felipe Alvarez</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+                    <li class="nav-item"><a class="nav-link" href="#introduccion">Introduccion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#redes">Redes</a></li>
+                    <li class="nav-item d-flex align-items-center gap-2 theme-switch">
+                        <i class="bi bi-sun-fill"></i>
+                        <div class="form-check form-switch mb-0">
+                            <input class="form-check-input" type="checkbox" role="switch" id="themeToggle">
+                        </div>
+                        <i class="bi bi-moon-stars-fill"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <header class="text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Portfolio</h1>
+            <p class="lead">Estudiante | Instituto Luis A Huergo</p>
+            <a href="cv/CV-Felipe-Alvarez.pdf" download class="btn btn-primary btn-lg mt-3">
+                <i class="bi bi-download"></i> Descargar CV
+            </a>
+        </div>
+    </header>
+
+    <div class="container my-5">
+
+        <section id="introduccion" class="mb-5">
+            <h2 class="border-bottom pb-2 mb-4">Introduccion</h2>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Nombre:</strong> Felipe Alvarez</li>
+                        <li class="list-group-item"><strong>Ocupacion:</strong> Estudiante</li>
+                        <li class="list-group-item"><strong>Institucion:</strong> Instituto Luis A Huergo</li>
+                        <li class="list-group-item"><strong>Edad:</strong> 16 Años</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="habilidades" class="mb-5">
+            <h2 class="border-bottom pb-2 mb-4">Habilidades</h2>
+            <div class="skills-flex">
+
+                <div class="skill-item">
+                    <i class="bi bi-filetype-py skill-icon"></i>
+                    <span class="skill-name">Python</span>
+                </div>
+
+                <div class="skill-item">
+                    <i class="bi bi-controller skill-icon"></i>
+                    <span class="skill-name">Pygame</span>
+                </div>
+
+                <div class="skill-item">
+                    <i class="bi bi-filetype-html skill-icon"></i>
+                    <span class="skill-name">HTML</span>
+                </div>
+
+                <div class="skill-item">
+                    <i class="bi bi-filetype-css skill-icon"></i>
+                    <span class="skill-name">CSS</span>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="proyectos" class="mb-5">
+            <h2 class="border-bottom pb-2 mb-4">Proyectos</h2>
+            <div class="row g-4">
+
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{% static 'img/mariano.jpg' %}" class="card-img-top" alt="Mariano Bros">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title">Mariano Bros</h3>
+                            <p class="card-text">Proyecto hecho en conjunto con Ivo Gioffre y Joaquin Mascia. Plataformero retro al estilo Mario Bros con nuestro propio toque: un verdulero intentando destruir el imperio de la comida rapida.</p>
+                            <a href="https://github.com/ivogioffre/proyecto-mario.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary mt-auto">
+                                <i class="bi bi-github"></i> Ver repositorio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{% static 'img/Pokemon.jpg' %}" class="card-img-top" alt="Pokemon Python">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title">Pokemon Python</h3>
+                            <p class="card-text">Proyecto realizado en Python inspirado en el universo de Pokemon.</p>
+                            <a href="https://github.com/pepe123-ui/Tp-2-pokemon.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary mt-auto">
+                                <i class="bi bi-github"></i> Ver repositorio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{% static 'img/Slither,.png' %}" class="card-img-top" alt="Slither.io">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title">Slither.io</h3>
+                            <p class="card-text">Recreacion del juego Slither.io.</p>
+                            <a href="https://github.com/pepe123-ui/Tp1-Felipe-Alvarez.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary mt-auto">
+                                <i class="bi bi-github"></i> Ver repositorio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+ 
+        <section id="redes" class="mb-5">
+            <h2 class="border-bottom pb-2 mb-4">Redes</h2>
+            <div class="d-flex gap-3">
+                <a href="https://www.linkedin.com/in/felipe-alvarez-huergo" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    <i class="bi bi-linkedin"></i> LinkedIn
+                </a>
+                <a href="" target="_blank" rel="noopener noreferrer" class="btn btn-danger">
+                    <i class="bi bi-instagram"></i> Instagram
+                </a>
+            </div>
+        </section>
+
+
+        <div class="text-center">
+            <img src="{% static 'img/Logoh.png' %}" alt="Logo Instituto Luis A Huergo" width="104" height="104">
+        </div>
+
+    </div>
+
+    <footer class="text-center py-3">
+        <p class="mb-0">&copy; 2026 Felipe Alvarez</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
