@@ -1,0 +1,35 @@
+.skills-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    justify-content: flex-start;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    flex: 1 1 140px;
+    max-width: 180px;
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+}
+
+.skill-item .skill-icon {
+    font-size: 2.5rem;
+    color: #0d6efd;
+}
+
+.skill-name {
+    font-weight: 600;
+}
+
+.portfolio-card .card-img-top {
+    height: 220px;
+}
+
+#redes .btn {
+    min-width: 180px;
+}

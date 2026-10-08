@@ -10,10 +10,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'blog.css' %}">
+    <script>
+        (function () {
+            const preferredTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', preferredTheme);
+        })();
+    </script>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{% url 'index' %}">Felipe Alvarez</a>
@@ -66,7 +72,6 @@
     </header>
 
     <div class="container my-5">
-
         {% if messages %}
         <div class="mb-4">
             {% for message in messages %}
@@ -149,13 +154,13 @@
         <section id="comentarios" class="mb-5">
             <h2 class="border-bottom pb-2 mb-4">Comentarios ({{ comments|length }})</h2>
             {% if comments %}
-            <ul class="list-group list-group-flush mb-4">
+            <ul class="comment-list mb-4">
                 {% for comment in comments %}
-                <li class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-2">
+                <li class="comment-item">
                     <div>
                         <strong>{{ comment.author.username }}</strong>
-                        <span class="text-muted small ms-2">{{ comment.created_at|date:"d/m/Y H:i" }}</span>
-                        <p class="mb-0 mt-1">{{ comment.body|linebreaksbr }}</p>
+                        <span class="comment-meta">{{ comment.created_at|date:"d/m/Y H:i" }}</span>
+                        <p class="comment-body">{{ comment.body|linebreaksbr }}</p>
                     </div>
                     {% if user.is_staff %}
                     <form method="post" action="{% url 'delete_comment' comment.id %}" class="ms-md-auto">
@@ -204,15 +209,15 @@
                         {% if entry.image %}
                         <img src="{{ entry.image.url }}" class="card-img-top" alt="{{ entry.title }}">
                         {% else %}
-                        <div class="card-img-top blog-card-placeholder d-flex align-items-center justify-content-center">
-                            <i class="bi bi-journal-text display-4 text-muted"></i>
+                        <div class="card-img-top blog-card-placeholder">
+                            <i class="bi bi-journal-text display-4"></i>
                         </div>
                         {% endif %}
                         <div class="card-body d-flex flex-column">
                             <time class="text-muted small">{{ entry.created_at|date:"d F Y" }}</time>
                             <h2 class="card-title h5 mt-1">{{ entry.title }}</h2>
-                            <p class="card-text text-muted flex-grow-1">{{ entry.content|truncatewords:28 }}</p>
-                            <a href="{% url 'blog_detail' entry.slug %}" class="btn btn-outline-primary mt-auto align-self-start">
+                            <p class="card-text flex-grow-1">{{ entry.content|truncatewords:28 }}</p>
+                            <a href="{% url 'blog_detail' entry.slug %}" class="btn btn-outline-primary mt-auto align-self-start blog-post-link">
                                 Leer más <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
@@ -240,5 +245,23 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme');
+            const initialTheme = savedTheme || root.getAttribute('data-theme') || 'light';
+
+            root.setAttribute('data-theme', initialTheme);
+            if (toggle) {
+                toggle.checked = initialTheme === 'dark';
+                toggle.addEventListener('change', function () {
+                    const nextTheme = this.checked ? 'dark' : 'light';
+                    root.setAttribute('data-theme', nextTheme);
+                    localStorage.setItem('theme', nextTheme);
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
