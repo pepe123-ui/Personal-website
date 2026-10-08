@@ -67,6 +67,19 @@
     margin-bottom: 0.25rem;
 }
 
+.comment-content {
+    flex: 1;
+}
+
+.comment-actions,
+.blog-category-filter,
+.blog-categories {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .comment-meta {
     color: var(--text-muted);
     font-size: 0.8rem;

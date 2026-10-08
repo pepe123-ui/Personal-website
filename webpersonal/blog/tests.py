@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import Comment, Post
+from .models import Category, Comment, Post
 
 
 class BlogTests(TestCase):
@@ -41,3 +41,53 @@ class BlogTests(TestCase):
 
         self.assertRedirects(response, reverse("blog_detail", args=[self.post.slug]))
         self.assertFalse(Comment.objects.filter(pk=self.comment.pk).exists())
+
+    def test_authenticated_user_can_toggle_post_like(self):
+        self.client.force_login(self.user)
+        url = reverse("toggle_post_like", args=[self.post.slug])
+
+        response = self.client.post(url)
+
+        self.assertRedirects(response, reverse("blog_detail", args=[self.post.slug]))
+        self.assertEqual(self.post.likes.count(), 1)
+
+        self.client.post(url)
+        self.assertEqual(self.post.likes.count(), 0)
+
+    def test_authenticated_user_can_toggle_comment_like(self):
+        self.client.force_login(self.user)
+        url = reverse("toggle_comment_like", args=[self.comment.pk])
+
+        response = self.client.post(url)
+
+        self.assertRedirects(response, reverse("blog_detail", args=[self.post.slug]))
+        self.assertEqual(self.comment.likes.count(), 1)
+
+        self.client.post(url)
+        self.assertEqual(self.comment.likes.count(), 0)
+
+    def test_anonymous_user_cannot_like(self):
+        response = self.client.post(
+            reverse("toggle_post_like", args=[self.post.slug])
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse("login"), response.url)
+        self.assertEqual(self.post.likes.count(), 0)
+
+    def test_category_filter_only_shows_matching_posts(self):
+        category = Category.objects.create(name="Tecnología")
+        self.post.categories.add(category)
+        other_post = Post.objects.create(
+            title="Otra entrada",
+            content="Contenido sin categoría.",
+            author=self.user,
+        )
+
+        response = self.client.get(
+            reverse("blog"), {"categoria": category.slug}
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.post.title)
+        self.assertNotContains(response, other_post.title)
